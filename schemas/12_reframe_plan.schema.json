@@ -1,0 +1,1 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Multi-Aspect Reframe Plan (SP3)", "type": "object", "required": ["schema_version", "source_video", "source_resolution", "target_lufs", "targets"]}

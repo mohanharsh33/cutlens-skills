@@ -1,0 +1,259 @@
+{
+  "schema_version": "1.0.0",
+  "repo": "cutlens-skills",
+  "title": "CutLens: Modular Cinema-Grade Video Forensics & Clean-Room Reverse-Prompting Skills",
+  "maintainer": "Harsh Mohan (mohanharsh33)",
+  "repository_url": "https://github.com/mohanharsh33/cutlens-skills",
+  "license": "MIT",
+  "spec": "agentskills.io",
+  "python_min_version": "3.12",
+  "external_cli_dependencies": [
+    "ffmpeg",
+    "ffprobe"
+  ],
+  "packs": [
+    {
+      "id": "pack-01-core-forensics",
+      "name": "Core Forensics & Cinematography",
+      "description": "Offline-first media ingest, 6-class shot forensics, camera/lens/blocking analysis, color grading + .cube LUT extraction, edit/VFX timelines, and 4-layer sound design.",
+      "skills": [
+        {
+          "name": "video-breakdown-orchestrator",
+          "path": "skills/video-breakdown-orchestrator",
+          "stage": "00-orchestrator",
+          "input_artifacts": [
+            "<local-video-path>"
+          ],
+          "output_artifacts": [
+            "artifacts/pipeline_state.json"
+          ],
+          "script": "scripts/manage_pipeline_state.py",
+          "has_script": true,
+          "has_schema": false,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "video-media-ingest",
+          "path": "skills/video-media-ingest",
+          "stage": "01-ingest",
+          "input_artifacts": [
+            "<local-video-path>"
+          ],
+          "output_artifacts": [
+            "artifacts/01_media_manifest.json"
+          ],
+          "script": "scripts/probe_media.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "shot-forensics-classify",
+          "path": "skills/shot-forensics-classify",
+          "stage": "02-forensics",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json"
+          ],
+          "output_artifacts": [
+            "artifacts/02_shot_forensics.json"
+          ],
+          "script": "scripts/score_shot_signals.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "camera-lens-blocking-audit",
+          "path": "skills/camera-lens-blocking-audit",
+          "stage": "03-camera-lens",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json",
+            "artifacts/02_shot_forensics.json"
+          ],
+          "output_artifacts": [
+            "artifacts/03_camera_blocking.json"
+          ],
+          "script": "scripts/analyze_camera_motion.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "color-grade-lighting-audit",
+          "path": "skills/color-grade-lighting-audit",
+          "stage": "04-color-lighting",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json",
+            "artifacts/03_camera_blocking.json"
+          ],
+          "output_artifacts": [
+            "artifacts/04_color_lighting.json",
+            "artifacts/look_starter.cube"
+          ],
+          "script": "scripts/extract_color_lut.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "edit-rhythm-vfx-transitions",
+          "path": "skills/edit-rhythm-vfx-transitions",
+          "stage": "05-edit-vfx",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json",
+            "artifacts/02_shot_forensics.json",
+            "artifacts/03_camera_blocking.json"
+          ],
+          "output_artifacts": [
+            "artifacts/05_edit_vfx_timeline.json",
+            "artifacts/captions.srt"
+          ],
+          "script": "scripts/extract_edit_vfx_srt.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "sound-design-foley-audit",
+          "path": "skills/sound-design-foley-audit",
+          "stage": "06-sound-design",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json",
+            "artifacts/05_edit_vfx_timeline.json"
+          ],
+          "output_artifacts": [
+            "artifacts/06_sound_design.json"
+          ],
+          "script": "scripts/analyze_audio_layers.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        }
+      ]
+    },
+    {
+      "id": "pack-02-reverse-prompt-qa",
+      "name": "Reverse-Prompt Engine & Fail-Closed QA",
+      "description": "Clean-room IP and continuity anchor locking, scene-by-scene reverse prompt synthesis across 5 video model dialects, and fail-closed deterministic QA verification.",
+      "skills": [
+        {
+          "name": "remake-constraints-lock",
+          "path": "skills/remake-constraints-lock",
+          "stage": "07-constraints-lock",
+          "input_artifacts": [
+            "artifacts/02_shot_forensics.json",
+            "artifacts/03_camera_blocking.json",
+            "artifacts/04_color_lighting.json",
+            "artifacts/05_edit_vfx_timeline.json",
+            "artifacts/06_sound_design.json"
+          ],
+          "output_artifacts": [
+            "artifacts/07_remake_constraints.json"
+          ],
+          "script": "scripts/sanitize_ip_anchors.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "scene-reverse-prompt-forge",
+          "path": "skills/scene-reverse-prompt-forge",
+          "stage": "08-prompt-forge",
+          "input_artifacts": [
+            "artifacts/03_camera_blocking.json",
+            "artifacts/04_color_lighting.json",
+            "artifacts/05_edit_vfx_timeline.json",
+            "artifacts/06_sound_design.json",
+            "artifacts/07_remake_constraints.json"
+          ],
+          "output_artifacts": [
+            "artifacts/08_scene_prompts.json",
+            "artifacts/08_REMAKE_BLUEPRINT.md",
+            "artifacts/report.html"
+          ],
+          "script": "scripts/compile_scene_prompts.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "remake-plan-qa-audit",
+          "path": "skills/remake-plan-qa-audit",
+          "stage": "09-qa-audit",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json",
+            "artifacts/07_remake_constraints.json",
+            "artifacts/08_scene_prompts.json"
+          ],
+          "output_artifacts": [
+            "artifacts/09_qa_report.json"
+          ],
+          "script": "scripts/audit_remake_plan.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        }
+      ]
+    },
+    {
+      "id": "pack-03-specialists",
+      "name": "Production Specialist Pack",
+      "description": "Composable specialist workflows for short-form retention auditing, Remotion React motion-graphics rebuilding, and multi-aspect safe-zone reframing.",
+      "skills": [
+        {
+          "name": "viral-hook-pacing-audit",
+          "path": "skills/viral-hook-pacing-audit",
+          "stage": "sp1-retention-audit",
+          "input_artifacts": [
+            "artifacts/05_edit_vfx_timeline.json",
+            "artifacts/06_sound_design.json"
+          ],
+          "output_artifacts": [
+            "artifacts/10_retention_audit.json",
+            "artifacts/10_RETENTION_AUDIT.md"
+          ],
+          "script": "scripts/score_retention_curve.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "remotion-code-rebuilder",
+          "path": "skills/remotion-code-rebuilder",
+          "stage": "sp2-remotion-rebuild",
+          "input_artifacts": [
+            "artifacts/02_shot_forensics.json",
+            "artifacts/04_color_lighting.json",
+            "artifacts/05_edit_vfx_timeline.json",
+            "artifacts/07_remake_constraints.json"
+          ],
+          "output_artifacts": [
+            "artifacts/11_remotion_bundle/Composition.tsx",
+            "artifacts/11_remotion_bundle/timing_parity.json"
+          ],
+          "script": "scripts/validate_remotion_timing.py",
+          "has_script": true,
+          "has_schema": false,
+          "has_openai_yaml": true
+        },
+        {
+          "name": "multi-aspect-reframe-plan",
+          "path": "skills/multi-aspect-reframe-plan",
+          "stage": "sp3-reframe-plan",
+          "input_artifacts": [
+            "artifacts/01_media_manifest.json",
+            "artifacts/03_camera_blocking.json",
+            "artifacts/05_edit_vfx_timeline.json"
+          ],
+          "output_artifacts": [
+            "artifacts/12_reframe_plan.json"
+          ],
+          "script": "scripts/plan_reframe_crops.py",
+          "has_script": true,
+          "has_schema": true,
+          "has_openai_yaml": true
+        }
+      ]
+    }
+  ]
+}

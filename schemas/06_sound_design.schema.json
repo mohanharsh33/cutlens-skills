@@ -1,0 +1,1 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Sound Design (Stage 06)", "type": "object", "required": ["schema_version", "source_manifest", "audio_present", "loudness_metrics", "rhythm_sync", "global_layers", "shots"]}

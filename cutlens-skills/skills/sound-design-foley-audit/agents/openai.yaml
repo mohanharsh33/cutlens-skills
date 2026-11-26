@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sound Design & Foley Audit"
+  short_description: "Measures EBU R128 LUFS, BPM, cut-to-beat sync, J/L-cuts, and 4-layer audio breakdown."
+policy:
+  allow_implicit_invocation: true

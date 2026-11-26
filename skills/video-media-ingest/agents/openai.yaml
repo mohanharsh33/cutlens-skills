@@ -1,0 +1,5 @@
+interface:
+  display_name: "Video Media Ingest"
+  short_description: "Probes container metadata, color space, AIGC tags, CFR/VFR jitter, cuts, and keyframes."
+policy:
+  allow_implicit_invocation: true

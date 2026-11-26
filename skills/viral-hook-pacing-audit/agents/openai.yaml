@@ -1,0 +1,5 @@
+interface:
+  display_name: "Viral Hook & Pacing Audit"
+  short_description: "Scores 0-3s hook velocity, flags static holds >4s, checks caption WPM, and outputs a re-edit punch list."
+policy:
+  allow_implicit_invocation: true

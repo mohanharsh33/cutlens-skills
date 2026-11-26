@@ -1,0 +1,5 @@
+interface:
+  display_name: "Edit Rhythm, VFX & Transitions"
+  short_description: "Measures cut cadence, transition types, speed ramps, overlay layers, and overlap-free SRT captions."
+policy:
+  allow_implicit_invocation: true

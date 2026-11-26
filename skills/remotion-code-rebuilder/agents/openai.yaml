@@ -1,0 +1,5 @@
+interface:
+  display_name: "Remotion Code Rebuilder"
+  short_description: "Rebuilds motion-graphics and UI shots into frame-exact React/Remotion TSX with FPS parity validation."
+policy:
+  allow_implicit_invocation: true

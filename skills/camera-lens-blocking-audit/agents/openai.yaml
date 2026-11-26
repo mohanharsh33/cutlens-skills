@@ -1,0 +1,5 @@
+interface:
+  display_name: "Camera Lens & Blocking Audit"
+  short_description: "Measures per-shot camera motion vectors, focal/DoF proxy, rig stability, and subject blocking."
+policy:
+  allow_implicit_invocation: true

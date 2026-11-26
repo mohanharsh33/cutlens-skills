@@ -1,0 +1,5 @@
+interface:
+  display_name: "Scene Reverse Prompt Forge"
+  short_description: "Compiles exact scene-by-scene T2I/I2V/T2V reverse prompts across 5 video models, Markdown blueprint, and HTML report."
+policy:
+  allow_implicit_invocation: true

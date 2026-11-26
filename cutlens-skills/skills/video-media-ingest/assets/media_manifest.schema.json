@@ -1,0 +1,1 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Media Manifest (Stage 01)", "type": "object", "required": ["schema_version", "source_video", "container", "video_stream", "audio_stream", "provenance_signals", "shots"]}

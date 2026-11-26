@@ -1,0 +1,5 @@
+interface:
+  display_name: "Color Grade & Lighting Audit"
+  short_description: "Extracts FFmpeg signalstats IRE luma, Lift/Gamma/Gain hex wheels, lighting topology, and a .cube LUT."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,1 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Scene Prompts (Stage 08)", "type": "object", "required": ["schema_version", "aspect_ratio", "fps", "total_duration_sec", "lut_file", "entity_anchors", "shots"]}

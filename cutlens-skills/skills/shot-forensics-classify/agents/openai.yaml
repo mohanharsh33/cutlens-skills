@@ -1,0 +1,5 @@
+interface:
+  display_name: "Shot Forensics Classify"
+  short_description: "Scores every shot across 6 production methods using offline telemetry before optional VLM review."
+policy:
+  allow_implicit_invocation: true
