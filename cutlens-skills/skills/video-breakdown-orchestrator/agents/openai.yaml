@@ -1,5 +1,0 @@
-interface:
-  display_name: "Video Breakdown Orchestrator"
-  short_description: "Routes a local video sequentially through CutLens forensics, cinematography, prompt, and QA stages."
-policy:
-  allow_implicit_invocation: true

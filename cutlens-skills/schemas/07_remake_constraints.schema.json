@@ -1,1 +1,0 @@
-{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Remake Constraints (Stage 07)", "type": "object", "required": ["schema_version", "clean_room_policy_version", "continuity_bible", "entity_anchors", "shot_routing", "forbidden_output_tokens", "ip_sanitization_report"]}

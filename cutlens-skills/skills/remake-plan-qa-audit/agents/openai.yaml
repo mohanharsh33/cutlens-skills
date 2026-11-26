@@ -1,5 +1,0 @@
-interface:
-  display_name: "Remake Plan QA Audit"
-  short_description: "Fail-closed validator checking runtime parity, camera grammar, dialect limits, LUT validity, and zero IP leaks."
-policy:
-  allow_implicit_invocation: true

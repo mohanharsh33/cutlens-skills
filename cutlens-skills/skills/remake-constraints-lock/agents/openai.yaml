@@ -1,5 +1,0 @@
-interface:
-  display_name: "Remake Constraints & Clean-Room IP Lock"
-  short_description: "Locks visual continuity tokens and deterministically scrubs copyrighted brands, watermarks, and likenesses."
-policy:
-  allow_implicit_invocation: true

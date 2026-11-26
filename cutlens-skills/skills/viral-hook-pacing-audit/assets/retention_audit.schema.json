@@ -1,1 +1,0 @@
-{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Retention Audit (SP1)", "type": "object", "required": ["schema_version", "target_format", "retention_score", "grade", "subscores", "diagnostics", "punch_list"]}

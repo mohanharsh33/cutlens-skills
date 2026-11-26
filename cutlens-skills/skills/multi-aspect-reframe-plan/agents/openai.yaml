@@ -1,5 +1,0 @@
-interface:
-  display_name: "Multi-Aspect Reframe Plan"
-  short_description: "Plans 9:16, 4:5, 1:1, and 16:9 subject-centered crops, checks UI safe-zone collisions, and emits FFmpeg commands."
-policy:
-  allow_implicit_invocation: true

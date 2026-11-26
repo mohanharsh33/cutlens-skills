@@ -1,1 +1,0 @@
-{"$schema": "https://json-schema.org/draft/2020-12/schema", "title": "CutLens Edit Rhythm & VFX (Stage 05)", "type": "object", "required": ["schema_version", "source_manifest", "fps", "total_duration_sec", "pacing_metrics", "captions_summary", "shots"]}
